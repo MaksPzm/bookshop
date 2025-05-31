@@ -1,0 +1,56 @@
+$font: "Montserrat", sans-serif;
+
+* {
+    font-family: $font;
+    padding: 0;
+    margin: 0;
+    
+}
+
+html {
+    width: 1440px;
+    margin: 0 auto;
+    font-size: 10px;
+}
+
+.header {
+    width: 1120px;
+    height: 11.6rem;
+    margin: 0 auto;
+    position: static;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header__logo {
+        font: 700 2.4rem / 100% $font;
+        color: #1C2A39;
+    }
+}
+
+.menu {
+    width: 37.2rem;
+    .menu__list {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        .menu__list-item {
+            .menu__list-item-link {
+                text-decoration: none;
+                text-transform: uppercase;
+                color: #5C6A79;
+                font: 700 1rem / 100% $font;
+            }
+            .menu__list-item-link_active,
+            .menu__list-item-link:hover {
+                color: #1C2A39;
+                font-weight: 900;
+            }
+        }   
+    }
+}
+
+.header__user {
+    width: 12.084rem;
+    display: flex;
+    justify-content: space-between;
+}
