@@ -1,4 +1,4 @@
-$font: "Montserrat", sans-serif;
+@import "variables";
 
 * {
     font-family: $font;
@@ -14,7 +14,7 @@ html {
 }
 
 .header {
-    width: 1120px;
+    width: 112rem;
     height: 11.6rem;
     margin: 0 auto;
     position: static;
@@ -53,4 +53,55 @@ html {
     width: 12.084rem;
     display: flex;
     justify-content: space-between;
+}
+
+.wrapper {
+    width: 112rem;
+    margin: 0 auto;
+}
+
+.banner {
+    width: 112rem;
+    position: relative;
+    .baner__img {
+        height: 70.2rem;
+        background: 100% 100%;
+        img {
+            width: 112rem;
+            height: 70.2rem;
+            background: 100% 100%;
+        }
+    }
+    .banner__slider-dots {
+        width: 5.6rem;
+        height: 1.2rem;
+        margin: 1.7rem auto 0;
+        display: flex;
+        justify-content: space-between;
+        .banner__slider-dots-dot {
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            background-color: #EFEEF6;
+            cursor: pointer;
+        }
+        .banner__slider-dots-dot_active {
+            background-color: #9E98DC;
+        }
+    }
+}
+
+.banner__prome-one,
+.banner__prome-two {
+    position: absolute;
+}
+
+.banner__prome-one {
+    top: 8.2rem;
+    left: 105.7rem;
+}
+
+.banner__prome-two {
+    top: 36.2rem;
+    left: 114.3rem;
 }

@@ -1,9 +1,11 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
     entry: './index.js',
+    devtool: "inline-source-map",
     output: {
         filename: 'main.js'
 
@@ -38,7 +40,18 @@ module.exports = {
         name: '[path][name].[ext]',
         },
       },
+      { test: /\.([cm]?ts|tsx)$/, loader: "ts-loader" },
     ],
+  },
+  resolve: {
+    // Add `.ts` and `.tsx` as a resolvable extension.
+    extensions: [".ts", ".tsx", ".js"],
+    // Add support for TypeScripts fully qualified ESM imports.
+    extensionAlias: {
+     ".js": [".js", ".ts"],
+     ".cjs": [".cjs", ".cts"],
+     ".mjs": [".mjs", ".mts"]
+    }
   },
   optimization: {
       minimizer: [

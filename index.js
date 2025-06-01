@@ -1,4 +1,5 @@
-import "./script/script";
+import "./script/script.ts";
+import "./script/slider.ts"
 import "./style/style.scss";
 function requireAll(r) { r.keys().forEach(r); } // функция для добавления всех картинок в webpack
 requireAll(require.context('/images/png', true));
