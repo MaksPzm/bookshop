@@ -56,13 +56,14 @@ html {
 }
 
 .wrapper {
-    width: 112rem;
+    width: 144rem;
     margin: 0 auto;
 }
 
 .banner {
     width: 112rem;
     position: relative;
+    margin: 0 auto;
     .baner__img {
         height: 70.2rem;
         background: 100% 100%;
@@ -104,4 +105,50 @@ html {
 .banner__prome-two {
     top: 36.2rem;
     left: 114.3rem;
+}
+
+.container {
+    width: 144rem;
+    margin-top: 10.5rem;
+    .containner__categories {
+        width: 41.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #EFEEF6;
+        .containner__categories-list {
+            list-style: none;
+            margin-top: 4.5rem;
+            margin-bottom: 8.1rem;
+            .containner__categories-list-item {
+                .containner__categories-list-item-submit {
+                    border: none;
+                    font: 500 1.2rem / 100% $font;
+                    color: #5C6A79;
+                    cursor: pointer;
+                }
+                .containner__categories-list-item-submit_active {
+                    font: 700 1.6rem $font;
+                    color: #1C2A39;
+                }
+            }
+            .containner__categories-list-item_active {
+                position: relative;
+            }
+            .containner__categories-list-item_active::before {
+                content: " ";
+                position: absolute;
+                width: 0.6rem;
+                height: 0.6rem;
+                background-color: #756AD3;
+                border-radius: 50%;
+                top: 0.7rem; 
+                left: -1.4rem;
+            }
+            .containner__categories-list-item:not(:last-of-type) {
+                padding-bottom: 2.3rem;
+            }    
+        }
+        
+    }
 }

@@ -24,3 +24,23 @@ function slider(): void {
 }
 
 slider()
+
+class Book {
+    img;
+    after;
+    name; 
+    rating;
+    description;
+    price;
+    constructor(img, after, name, rating, description, price) {
+        this.img = img;
+        this.after = after;
+        this.name = name;
+        this.rating = rating;
+        this.description = description;
+        this.price = price;
+    }
+    showBooks(){
+
+    }
+}
