@@ -44,3 +44,10 @@ class Book {
 
     }
 }
+
+function URL() {
+    fetch("https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyCvzFkuSjiZgJOh90lZaYuv9qUT2xypKNs&printType=books&startIndex=0&maxResults=6&langRestrict=en")
+        .then()
+        .then()
+        .catch()
+}
