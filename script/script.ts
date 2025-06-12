@@ -45,9 +45,102 @@ class Book {
     }
 }
 
-function URL() {
-    fetch("https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyCvzFkuSjiZgJOh90lZaYuv9qUT2xypKNs&printType=books&startIndex=0&maxResults=6&langRestrict=en")
-        .then()
-        .then()
-        .catch()
+ 
+
+
+const selectedCategory = (() => {
+    const valueSelectedCategory: string[] = [ ];
+    const categories = document.querySelectorAll(".containner__categories-list-item");
+    categories.forEach((category) => {
+        category.addEventListener('click', () => {
+            const categoriesInputActive = document.querySelector(".containner__categories-list-item-submit_active")
+            categories.forEach((value) => value.classList.remove("containner__categories-list-item_active"));
+            categoriesInputActive?.classList.remove("containner__categories-list-item-submit_active");
+            category.classList.add("containner__categories-list-item_active");
+            category.querySelector(".containner__categories-list-item-submit")?.classList.add("containner__categories-list-item-submit_active");
+            const valueCategory: null | HTMLInputElement = document.querySelector(".containner__categories-list-item-submit_active");
+            if (valueCategory !== null) {
+                valueSelectedCategory.pop();
+                valueSelectedCategory.unshift(valueCategory.value);
+                localStorage.setItem("category", JSON.stringify(valueSelectedCategory.join()))
+            }
+            console.log("value", valueSelectedCategory);
+            API()
+            saveCategoriesActive()
+            location.reload()
+        })
+    })
+    
+})()
+
+function saveCategoriesActive() {
+    const categories = document.querySelectorAll(".containner__categories-list-item");
+    // categories.forEach((value, index, array) => {
+    //     let active = value.classList.contains("containner__categories-list-item_active");
+    //     console.log("a", active);
+        
+    // }) 
+    const activeCat = document.querySelector(".containner__categories-list-item_active")?.getAttribute("index");
+    if (activeCat !== null) {
+       localStorage.setItem("indexActive", JSON.stringify(activeCat))  
+    }   
 }
+
+loadCategoriesActive()
+
+function loadCategoriesActive() {
+    let localIndexActive: number = localStorage.getItem("indexActive") ? parseInt(JSON.parse(<string>localStorage.getItem("indexActive"))) : +0;
+    console.log("Мы здесь");
+    const categories = document.querySelectorAll(".containner__categories-list-item");
+    const categoriesInput = document.querySelectorAll(".containner__categories-list-item-submit");
+    categories.forEach(category => category.classList.remove("containner__categories-list-item_active"));
+    categoriesInput.forEach(categoryInput => categoryInput.classList.remove("containner__categories-list-item-submit_active"));
+    if (localIndexActive === null) return;
+    categories[localIndexActive].classList.add("containner__categories-list-item_active");
+    categoriesInput[localIndexActive].classList.add("containner__categories-list-item-submit_active");
+}
+
+
+
+function API() {
+    let category: string = localStorage.getItem("category") ? <string>localStorage.getItem("category") : "Architecture";
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&key=AIzaSyCvzFkuSjiZgJOh90lZaYuv9qUT2xypKNs&printType=books&startIndex=0&maxResults=6&langRestrict=en`)
+        .then((response) => response.json())
+        .then(displayResult)
+        .catch((err) => console.log("ERROR"))
+        
+}
+API()
+
+function displayResult(data: any) {
+    let resultAPI = data.items;
+    const containerBooks: HTMLDivElement | null = document.querySelector(".container__books");
+    console.log("22", resultAPI);
+    for (let i = 0; i < resultAPI.length; i++) {
+        let price: number | string = resultAPI[i].saleInfo.retailPrice ? resultAPI[i].saleInfo.retailPrice.amount / 80 : "no price";
+        
+        
+        const showBook = `
+            <div class="container__books-block" index=${i} id="book-${i}">
+                <img class="container__books-block-img" src="${resultAPI[i].volumeInfo.imageLinks.thumbnail}">
+                <div class="container__books-block-info">
+                    <span class="container__books-block-info-autor">${resultAPI[i].volumeInfo.authors[0]}</span>
+                    <h2 class="container__books-block-info-title">${resultAPI[i].volumeInfo.title}</h2>
+                    <span></span>
+                    <p class="container__books-block-info-description">${resultAPI[i].volumeInfo.description}</p>
+                    <span class="container__books-block-info-price">${price}</span>
+                </div>
+            </div>
+        `
+        containerBooks?.insertAdjacentHTML("beforeend", showBook)
+    }
+    console.log("pp", pp);
+    
+}
+// <div class="container__books-block-info">
+//                     <span class="container__books-block-info-autor">${resultAPI[i].volumeInfo.authors[0]}</span>
+//                     <h2 class="container__books-block-info-title">${resultAPI[i].volumeInfo.title}</h2>
+//                     <span></span>
+//                     <p class="container__books-block-info-description">${resultAPI[i].volumeInfo.description}</p>
+//                     <span class="container__books-block-info-price">${resultAPI[i].saleInfo.retailPrice.amount / 80}</span>
+//                 </div>

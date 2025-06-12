@@ -10,7 +10,6 @@
   },
   "author": "Pankratov",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
@@ -24,5 +23,14 @@
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaksPzm/bookshop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MaksPzm/bookshop/issues"
+  },
+  "homepage": "https://github.com/MaksPzm/bookshop#readme",
+  "description": ""
 }

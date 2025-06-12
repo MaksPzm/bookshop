@@ -17,7 +17,9 @@ html {
     width: 112rem;
     height: 11.6rem;
     margin: 0 auto;
-    position: static;
+    position: sticky;
+    top: 0;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,5 +152,35 @@ html {
             }    
         }
         
+    }
+    .container__books {
+        width: 92.4rem;
+        display: flex;
+        column-gap: 7.6rem;
+        row-gap: 9.6rem;
+        flex-wrap: wrap;
+        .container__books-block {
+            width: 42.4rem;
+            height: 30rem;
+            display: flex;
+            gap: 3.6rem;
+            
+            .container__books-block-img {
+                width: 21.2rem;
+                height: 30rem;
+            }
+            .container__books-block-info {
+                width: 17.6rem;
+                height: 20.3rem;
+                .container__books-block-info-description{
+                    width: 17.6rem;
+                    height: 3.8rem;
+                    font: 1rem / 100% $fontDescriptions;
+                    line-clamp: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
     }
 }
