@@ -117,16 +117,20 @@ function displayResult(data: any) {
     const containerBooks: HTMLDivElement | null = document.querySelector(".container__books");
     console.log("22", resultAPI);
     for (let i = 0; i < resultAPI.length; i++) {
-        let price: number | string = resultAPI[i].saleInfo.retailPrice ? resultAPI[i].saleInfo.retailPrice.amount / 80 : "no price";
-        
-        
+        let price: number | string = resultAPI[i].saleInfo.retailPrice ? "$" + (resultAPI[i].saleInfo.retailPrice.amount / 80).toFixed(2) : "free";
+        console.log("pr", price);
+        let averageRating: string = resultAPI[i].volumeInfo.averageRating ? resultAPI[i].volumeInfo.averageRating : "The rating is not";
+        let ratingsCount: string = resultAPI[i].volumeInfo.ratingsCount ? resultAPI[i].volumeInfo.ratingsCount + " review" : " ";
         const showBook = `
             <div class="container__books-block" index=${i} id="book-${i}">
                 <img class="container__books-block-img" src="${resultAPI[i].volumeInfo.imageLinks.thumbnail}">
                 <div class="container__books-block-info">
                     <span class="container__books-block-info-autor">${resultAPI[i].volumeInfo.authors[0]}</span>
                     <h2 class="container__books-block-info-title">${resultAPI[i].volumeInfo.title}</h2>
-                    <span></span>
+                    <div class="container__books-block-info-rating">
+                        <div class="container__books-block-info-rating-averageRating">${averageRating}</div>
+                        <span class="container__books-block-info-rating-ratingsCount">${ratingsCount}</span>
+                    </div>
                     <p class="container__books-block-info-description">${resultAPI[i].volumeInfo.description}</p>
                     <span class="container__books-block-info-price">${price}</span>
                 </div>
@@ -134,13 +138,5 @@ function displayResult(data: any) {
         `
         containerBooks?.insertAdjacentHTML("beforeend", showBook)
     }
-    console.log("pp", pp);
     
 }
-// <div class="container__books-block-info">
-//                     <span class="container__books-block-info-autor">${resultAPI[i].volumeInfo.authors[0]}</span>
-//                     <h2 class="container__books-block-info-title">${resultAPI[i].volumeInfo.title}</h2>
-//                     <span></span>
-//                     <p class="container__books-block-info-description">${resultAPI[i].volumeInfo.description}</p>
-//                     <span class="container__books-block-info-price">${resultAPI[i].saleInfo.retailPrice.amount / 80}</span>
-//                 </div>
