@@ -186,12 +186,17 @@ html {
                     font: 700 1.6rem / 100% $font;
                     color: $colorTitleBook;
                     padding-top: 0.4rem;
+                    display: -webkit-box;  
+                    -webkit-box-orient: vertical;  
+                    -webkit-line-clamp: 1; /* Ограничить 3 строками */  
+                    overflow: hidden;  
+                    text-overflow: ellipsis; 
                 }
                 .container__books-block-info-rating {
                     width: 17.6rem;
                     display: flex;
-                    margin-top: 0.4rem;
                     gap: 0.6rem;
+                    margin-top: 0.4rem;
                     .container__books-block-info-rating-ratingsCount,
                     .container__books-block-info-rating-averageRating {
                         font: 1rem $fontDescriptions;
@@ -200,12 +205,13 @@ html {
                 }
                 .container__books-block-info-description{
                     width: 17.6rem;
-                    height: 3.8rem;
                     font: 1rem / 100% $fontDescriptions;
                     color: $colorTextDescriptions;
-                    line-clamp: 1;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    display: -webkit-box;  
+                    -webkit-box-orient: vertical;  
+                    -webkit-line-clamp: 3; /* Ограничить 3 строками */  
+                    overflow: hidden;  
+                    text-overflow: ellipsis; 
                     margin-top: 1.6rem;
                 }
                 .container__books-block-info-price {
@@ -214,7 +220,22 @@ html {
                     padding-top: 1.6rem;
                     color: $colorTitleBook;
                 }
+                .container__books-block-info-btn {
+                    @extend .btn;
+                }
+                .container__books-block-info-btn:hover {
+                    @extend .btn-hover;
+                }
             }
         }
     }
+}
+
+.container__btn {
+    @extend .btn;
+    display: block;
+    margin: 9.6rem 52.3rem 7.4rem 74.1rem;
+}
+.container__btn:hover {
+    @extend .btn-hover;
 }

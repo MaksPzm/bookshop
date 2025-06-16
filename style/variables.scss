@@ -2,3 +2,18 @@ $font: "Montserrat", sans-serif;
 $fontDescriptions: "Open sans", sans-serif;
 $colorTextDescriptions: #5C6A79;
 $colorTitleBook: #1C2A39;
+.btn {
+    width: 17.6rem;
+    height: 4.5rem;
+    border: 0.1rem solid #4C3DB2;
+    color: #4C3DB2;
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    font: 700 0.8rem / 100% $font;
+    cursor: pointer;
+    margin-top: 1.6rem;
+}
+.btn-hover {
+    border-color: #EEEDF5;
+    color: #5C6A79;
+}
