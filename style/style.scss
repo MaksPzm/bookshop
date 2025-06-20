@@ -223,6 +223,9 @@ html {
                 .container__books-block-info-btn {
                     @extend .btn;
                 }
+                .container__books-block-info-btn_active {
+                    @extend .btn-hover;
+                }
                 .container__books-block-info-btn:hover {
                     @extend .btn-hover;
                 }
@@ -238,4 +241,24 @@ html {
 }
 .container__btn:hover {
     @extend .btn-hover;
+}
+
+.header__user-block-cart {
+    position: relative;
+}
+.header__user-block-cart-numberBooks {
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: #FF353A;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0.8rem;
+    left: 0.5rem;
+    .header__user-block-cart-numberBooks-text{
+        color: #FFFFFF;
+        font: 500 1rem / 100% $font;
+    }
 }
