@@ -1,6 +1,7 @@
 
 export default function dataBook(): void {
     let boocksData: any = [ ];
+    console.log('boocksData: ', boocksData);
     let boocksDataLocal: any;
     
     if (localStorage.getItem("publishedBooks") !== null) {
@@ -14,6 +15,7 @@ export default function dataBook(): void {
     btnBuy.forEach((bay, index, array) => {
         
         bay.addEventListener("click", () => {
+            // localStorage.clear()
             const boock = bay.closest(`#book-${index}`);
             if (boock == null) return;
             const indexBoock: string | null = boock.getAttribute("index")
@@ -35,7 +37,7 @@ export default function dataBook(): void {
                 ratingCountBock: string | null,
                 descriptionBock: string | null,
                 priceBock: string | null,
-        };
+            };
             let infoBock: infoBock = {
                 indexBoock: indexBoock,
                 srcImgBock: srcImgBock,
@@ -52,11 +54,13 @@ export default function dataBook(): void {
             
             if (bay.classList.contains("container__books-block-info-btn_active")) {
                 bay.classList.remove("container__books-block-info-btn_active");
+                bay.classList.add("container__books-block-info-btn")
                 numberOfBoks = numberOfBoks - 1;
                 bay.innerHTML = "buy now";
                 removeToBook(numberOfBoks);
             } else {
                 bay.classList.add("container__books-block-info-btn_active");
+                bay.classList.remove("container__books-block-info-btn")
                 bay.innerHTML = "in the cart";
                 numberOfBoks = numberOfBoks + 1;
                 addToBook(numberOfBoks);

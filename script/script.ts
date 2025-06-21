@@ -1,5 +1,6 @@
 import Sliders from "./slider";
 import dataBook from "./dataBook";
+import cart from "./addedToCart";
 function menuActive(): void {
     const menuLink: any = Array.from(document.querySelectorAll(".menu__list-item-link"));
     menuLink.forEach((item: HTMLLinkElement) => {
@@ -159,3 +160,4 @@ const loadMore = () => {
 loadMore()
 
 
+cart()
