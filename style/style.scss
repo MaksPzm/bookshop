@@ -173,6 +173,7 @@ html {
             .container__books-block-img {
                 width: 21.2rem;
                 height: 30rem;
+                box-shadow: 0px 24px 36px 0px #35315447;
             }
             .container__books-block-info {
                 width: 17.6rem;
@@ -261,4 +262,21 @@ html {
         color: #FFFFFF;
         font: 500 1rem / 100% $font;
     }
+}
+
+
+
+
+.rating polygon:hover {
+  cursor: pointer;
+  transition: 500ms;
+}
+.rating polygon:hover {
+  fill: black;
+}
+.rating polygon {
+  fill: lightgray;
+}
+.rating polygon.active{
+  fill: gold;
 }

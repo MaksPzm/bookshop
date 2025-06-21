@@ -1,4 +1,5 @@
 import Sliders from "./slider";
+import dataBook from "./dataBook";
 function menuActive(): void {
     const menuLink: any = Array.from(document.querySelectorAll(".menu__list-item-link"));
     menuLink.forEach((item: HTMLLinkElement) => {
@@ -47,7 +48,6 @@ const selectedCategory = (() => {
                 valueSelectedCategory.unshift(valueCategory.value);
                 localStorage.setItem("category", JSON.stringify(valueSelectedCategory.join()))
             }
-            console.log("value", valueSelectedCategory);
             API()
             saveCategoriesActive()
         })
@@ -67,7 +67,6 @@ loadCategoriesActive()
 
 function loadCategoriesActive() {
     let localIndexActive: number = localStorage.getItem("indexActive") ? parseInt(JSON.parse(<string>localStorage.getItem("indexActive"))) : +0;
-    console.log("Мы здесь");
     const categories = document.querySelectorAll(".containner__categories-list-item");
     const categoriesInput = document.querySelectorAll(".containner__categories-list-item-submit");
     categories.forEach(category => category.classList.remove("containner__categories-list-item_active"));
@@ -76,9 +75,6 @@ function loadCategoriesActive() {
     categories[localIndexActive].classList.add("containner__categories-list-item_active");
     categoriesInput[localIndexActive].classList.add("containner__categories-list-item-submit_active");
 }
-let boocksData: any = [ ];
-let boocksDataLocal: any = localStorage.getItem("publishedBooks") ? JSON.parse(localStorage.getItem("publishedBooks")) : [ ];
-console.log("b.D", boocksDataLocal);
 
 function API(startIndex = 0, maxResults = 6) {
     let category: string = localStorage.getItem("category") ? <string>localStorage.getItem("category") : "Architecture";
@@ -94,13 +90,11 @@ function displayResult(data: any) {
 
     let resultAPI = data.items;
     const containerBooks: HTMLDivElement | null = document.querySelector(".container__books");
-    console.log("22", resultAPI);
     for (let i = 0; i < resultAPI.length; i++) {
-        let img = resultAPI[i].volumeInfo.imageLinks.thumbnail;
-        let title = resultAPI[i].volumeInfo.title;
+        let img = resultAPI[i].volumeInfo.imageLinks.thumbnail ? resultAPI[i].volumeInfo.imageLinks.thumbnail : "";
+        let title = resultAPI[i].volumeInfo.title ? resultAPI[i].volumeInfo.title : "";
         let price: number | string = resultAPI[i].saleInfo.retailPrice ? "$" + (resultAPI[i].saleInfo.retailPrice.amount / 80).toFixed(2) : "";
-        console.log("pr", price);
-        let authors: string = (resultAPI[i].volumeInfo.authors).join(",");
+        let authors: string = resultAPI[i].volumeInfo.authors ? (resultAPI[i].volumeInfo.authors).join(", ") : "";
         let averageRating: string = resultAPI[i].volumeInfo.averageRating ? resultAPI[i].volumeInfo.averageRating : "";
         let ratingsCount: string = resultAPI[i].volumeInfo.ratingsCount ? resultAPI[i].volumeInfo.ratingsCount + " review" : "";
         let description: string = resultAPI[i].volumeInfo.description ? resultAPI[i].volumeInfo.description : "There is no description";
@@ -111,7 +105,7 @@ function displayResult(data: any) {
                     <span class="container__books-block-info-autor">${authors}</span>
                     <h2 class="container__books-block-info-title">${title}</h2>
                     <div class="container__books-block-info-rating">
-                        <div class="container__books-block-info-rating-averageRating">${averageRating}</div>
+                        <div class="container__books-block-info-rating-averageRating"><span class="container__books-block-info-rating-averageRating-textSp">${averageRating}</span></div>
                         <span class="container__books-block-info-rating-ratingsCount">${ratingsCount}</span>
                     </div>
                     <p class="container__books-block-info-description">${description}</p>
@@ -122,70 +116,34 @@ function displayResult(data: any) {
         `
         containerBooks?.insertAdjacentHTML("beforeend", showBook);
     }
+    averageRating()
 }
 
-function dataBook(): void {
-    const btnBuy = document.querySelectorAll(".container__books-block-info-btn");
-    console.log("btnBuy", btnBuy);
-    let numberOfBoks = 0;
-    btnBuy.forEach((bay, index, array) => {
-        
-        bay.addEventListener("click", () => {
-            const boock = bay.closest(`#book-${index}`);
-            if (boock == null) return;
-            const indexBoock: string | null = boock.getAttribute("index")
-            const imgBock: HTMLImageElement | null = boock?.querySelector(".container__books-block-img") ? boock.querySelector(".container__books-block-img") : null;
-            let srcImgBock: string = ""
-            if (imgBock !== null) srcImgBock = imgBock.src;
-            const autorBock: string = <string>boock?.querySelector(".container__books-block-info-autor")?.textContent;
-            const titleBock: string = <string>boock.querySelector(".container__books-block-info-title")?.textContent;
-            const averageRatingBock: string | null = boock.querySelector(".container__books-block-info-rating-averageRating") ? <string>boock.querySelector(".container__books-block-info-rating-averageRating")?.textContent : null;
-            const ratingCountBock: string | null = boock.querySelector(".container__books-block-info-rating-ratingsCount") ? <string>boock.querySelector(".container__books-block-info-rating-ratingsCount")?.textContent : null;
-            const descriptionBock: string | null = boock.querySelector(".container__books-block-info-description") ? <string>boock.querySelector(".container__books-block-info-description")?.textContent : null;
-            const priceBock: string | null = boock.querySelector(".container__books-block-info-price") ? <string>boock.querySelector(".container__books-block-info-price")?.textContent : null;
-            type infoBock = {
-                indexBoock: string | null,
-                srcImgBock: string,
-                autorBock: string,
-                titleBock: string,
-                averageRatingBock: string | null,
-                ratingCountBock: string | null,
-                descriptionBock: string | null,
-                priceBock: string | null,
-        };
-            let infoBock: infoBock = {
-                indexBoock: indexBoock,
-                srcImgBock: srcImgBock,
-                autorBock: autorBock,
-                titleBock: titleBock,
-                averageRatingBock: averageRatingBock,
-                ratingCountBock: ratingCountBock,
-                descriptionBock: descriptionBock,
-                priceBock: priceBock
-            }
-            boocksData.push(infoBock);
-            boocksDataLocal.push(infoBock);
-            localStorage.setItem("publishedBooks", JSON.stringify(boocksDataLocal));
-            
-            if (bay.classList.contains("container__books-block-info-btn_active")) {
-                bay.classList.remove("container__books-block-info-btn_active");
-                numberOfBoks = numberOfBoks - 1;
-                bay.innerHTML = "buy now";
-                removeToBook(numberOfBoks)
-                console.log(numberOfBoks, "numA");
-            } else {
-                bay.classList.add("container__books-block-info-btn_active");
-                bay.innerHTML = "in the cart";
-                numberOfBoks = numberOfBoks + 1;
-                addToBook(numberOfBoks);
-                console.log(numberOfBoks, "numB");
-                
+function averageRating() {
+    let newImgGold = `<img class="container__books-block-info-rating-averageRating-star-gold" src="./images/svg/StarGo.svg" als="star">`;
+    let imgStar = `<img class="container__books-block-info-rating-averageRating-star-gold" src="./images/svg/Star.svg" als="star">`;
+    const divAverageRating = document.querySelectorAll(".container__books-block-info-rating-averageRating");
+    
+    divAverageRating.forEach((div, index, array) => {
+        let textSpan: any = div.querySelector(".container__books-block-info-rating-averageRating-textSp");
+        if (textSpan === null) return;
+        let numContent: number = +textSpan.textContent;
+        let resultRating = 5 - numContent;
 
+        if (numContent > 0) {
+            for (let i = 0; i < numContent; i++) {
+                div.insertAdjacentHTML("beforeend", newImgGold);
             }
-            
-        })
+            for (let i = 0; i < resultRating; i++) {
+                div.insertAdjacentHTML("beforeend", imgStar);
+            }
+        }
+        let firsElementDivAverageRating = div.querySelector(".container__books-block-info-rating-averageRating-textSp");
+        if (firsElementDivAverageRating !== null) firsElementDivAverageRating.remove();
+        
     })
 }
+
 
 const loadMore = () => {
     const btnLoadMore = document.querySelector(".container__btn");
@@ -195,38 +153,9 @@ const loadMore = () => {
     btnLoadMore.addEventListener('click', (e) => {
         let startIndex = click * count;
         API(startIndex)
-        console.log("click", startIndex);
         click++;
     })
 }
 loadMore()
 
-const addToBook = (numberOfBoks: number) => {
-    const cart: HTMLDivElement | null = document.querySelector(".header__user-block-cart");
-    if (cart === null) return;
-    const numberBooksDiv = document.querySelectorAll(".header__user-block-cart-numberBooks").length;
-    if (numberBooksDiv == 0) {
-        const numberBooks: HTMLDivElement = document.createElement("div");
-        numberBooks.classList.add("header__user-block-cart-numberBooks");
-        let numText = document.createElement("p");
-        numText.classList.add("header__user-block-cart-numberBooks-text");
-        numText.innerText = `${numberOfBoks}`;
-        numberBooks.appendChild(numText);
-        cart.appendChild(numberBooks);
-    } else {
-        const numberBooksText = document.querySelector(".header__user-block-cart-numberBooks-text");
-        if (numberBooksText == null) return;
-        numberBooksText.textContent = `${numberOfBoks}`
-    }
-    
-}
 
-const removeToBook = (numberOfBoks: number) => {
-    const numberBooks = document.querySelector(".header__user-block-cart-numberBooks");
-    const numberBooksText = document.querySelector(".header__user-block-cart-numberBooks-text");
-    console.log('numberBooksText: ', numberBooksText);
-    if (numberBooks == null) return;
-    if (numberBooksText == null) return;
-    numberBooksText.textContent = `${numberOfBoks}`;
-    if (numberOfBoks === 0) numberBooks.remove();
-}
