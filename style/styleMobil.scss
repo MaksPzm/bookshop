@@ -1,0 +1,126 @@
+@media screen and (max-width: 720px) {
+    @import "variables";
+    * {
+    font-family: $font;
+    padding: 0;
+    margin: 0; 
+    }
+
+    html {
+        width: 720px;
+        margin: 0 auto;
+        font-size: 8px;
+    }
+
+    .header {
+        width: 720px;
+        height: 11.6rem;
+        margin: 0 auto;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .header__logo {
+            font: 700 2.4rem / 100% $font;
+            color: $colorTitleBook;
+        }
+    }
+
+    .header__mobil-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 2.5rem;
+        height: 2rem;
+        border: 0.1rem solid $colorTitleBook;
+        margin-left: auto;
+        margin-right: 4rem;
+        margin-bottom: 0.5rem;
+        border-radius: 3px;
+        cursor: pointer;
+        div {
+            width: 2rem;
+            height: 1px;
+            border: 0.1rem solid $colorTitleBook;
+            border-radius: 0.2rem;
+        }
+    }
+
+    .menu__mobil {
+        width: 20rem;
+        height: 30rem;
+        position: absolute;
+        top: 10rem;
+        right: 1rem;
+        border: 2px solid $colorTitleBook;
+        border-radius: 4px;
+        box-shadow: 0 10px 20px 0 $colorTitleBook;
+        .menu__list {
+            width: 20rem;
+            height: 25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            .menu__list-item {
+                width: 18rem;
+                height: 2.5rem;
+                border: 1px solid $colorTitleBook;
+                border-radius: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #EFEEF6;
+            }
+        }
+    }
+
+    .menu__mobil_hidden {
+        display: none;
+    }
+
+    .wrapper {
+        width: 90rem;
+    }
+
+    .banner {
+        width: 90rem;
+        position: relative;
+        margin: 0 auto;
+        .baner__img {
+            height: 50rem;
+            background: 100% 100%;
+            img {
+                width: 90rem;
+                height: 50rem;
+                background: 100% 100%;
+            }
+        }
+    }
+
+    .banner__prome-one {
+        top: -3rem;
+        left: 73rem;
+        background-color: rgb(158, 152, 220, 0.8);
+    }
+    .banner__prome-two {
+        top: 36.2rem;
+        left: 3rem;
+        background-color: rgb(255, 143, 230, 0.8);
+    }
+
+    .container {
+        width: 90rem;
+    }
+
+    .container__btn {
+        margin: 9.6rem auto 20rem;
+    }
+
+    .header__user-block-cart {
+        position: relative;
+    }
+} 

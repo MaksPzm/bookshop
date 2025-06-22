@@ -1,9 +1,7 @@
 
 export default function dataBook(): void {
     let boocksData: any = [ ];
-    console.log('boocksData: ', boocksData);
     let boocksDataLocal: any;
-    
     if (localStorage.getItem("publishedBooks") !== null) {
         let parse = localStorage.getItem("publishedBooks")
         boocksDataLocal = JSON.parse(<string>parse);
@@ -13,9 +11,8 @@ export default function dataBook(): void {
     const btnBuy = document.querySelectorAll(".container__books-block-info-btn");
     let numberOfBoks = 0;
     btnBuy.forEach((bay, index, array) => {
-        
+        localStorage.clear()
         bay.addEventListener("click", () => {
-            // localStorage.clear()
             const boock = bay.closest(`#book-${index}`);
             if (boock == null) return;
             const indexBoock: string | null = boock.getAttribute("index")
@@ -48,33 +45,33 @@ export default function dataBook(): void {
                 descriptionBock: descriptionBock,
                 priceBock: priceBock
             }
-            boocksData.push(infoBock);
-            boocksDataLocal.push(infoBock);
-            localStorage.setItem("publishedBooks", JSON.stringify(boocksDataLocal));
             
             if (bay.classList.contains("container__books-block-info-btn_active")) {
                 bay.classList.remove("container__books-block-info-btn_active");
                 bay.classList.add("container__books-block-info-btn")
                 numberOfBoks = numberOfBoks - 1;
                 bay.innerHTML = "buy now";
+                boocksData.pop(infoBock);
+                boocksDataLocal.pop(infoBock);
+                localStorage.setItem("publishedBooks", JSON.stringify(boocksDataLocal));
+                
                 removeToBook(numberOfBoks);
             } else {
                 bay.classList.add("container__books-block-info-btn_active");
                 bay.classList.remove("container__books-block-info-btn")
                 bay.innerHTML = "in the cart";
                 numberOfBoks = numberOfBoks + 1;
+                boocksData.push(infoBock);
+                boocksDataLocal.push(infoBock);
+                localStorage.setItem("publishedBooks", JSON.stringify(boocksDataLocal));
                 addToBook(numberOfBoks);
             }
-            
         })
     })
-    
-    
 }
 
 const addToBook = (numberOfBoks: number) => {
     const cart: HTMLDivElement | null = document.querySelector(".header__user-block-cart");
-    console.log(' cart: ',  cart);
     if (cart === null) return;
     const numberBooksDiv = document.querySelectorAll(".header__user-block-cart-numberBooks").length;
     if (numberBooksDiv == 0) {

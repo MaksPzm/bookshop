@@ -1,6 +1,7 @@
 import Sliders from "./slider";
 import dataBook from "./dataBook";
 import cart from "./addedToCart";
+import mobilActiveMenu from "./mobil";
 function menuActive(): void {
     const menuLink: any = Array.from(document.querySelectorAll(".menu__list-item-link"));
     menuLink.forEach((item: HTMLLinkElement) => {
@@ -97,7 +98,7 @@ function displayResult(data: any) {
         let price: number | string = resultAPI[i].saleInfo.retailPrice ? "$" + (resultAPI[i].saleInfo.retailPrice.amount / 80).toFixed(2) : "";
         let authors: string = resultAPI[i].volumeInfo.authors ? (resultAPI[i].volumeInfo.authors).join(", ") : "";
         let averageRating: string = resultAPI[i].volumeInfo.averageRating ? resultAPI[i].volumeInfo.averageRating : "";
-        let ratingsCount: string = resultAPI[i].volumeInfo.ratingsCount ? resultAPI[i].volumeInfo.ratingsCount + " review" : "";
+        let ratingsCount: string = resultAPI[i].volumeInfo.ratingsCount ? resultAPI[i].volumeInfo.ratingsCount + "M" + " review" : "";
         let description: string = resultAPI[i].volumeInfo.description ? resultAPI[i].volumeInfo.description : "There is no description";
         const showBook = `
             <div class="container__books-block" index=${i} id="book-${i}">
@@ -161,3 +162,4 @@ loadMore()
 
 
 cart()
+mobilActiveMenu()

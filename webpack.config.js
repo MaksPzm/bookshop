@@ -20,7 +20,7 @@ module.exports = {
       compress: true,
       port: 9000,
     },
-    mode: "development",
+    mode: "production",
     plugins: [new MiniCssExtractPlugin(),
       new HtmlWebpackPlugin({
         filename: 'index.html',

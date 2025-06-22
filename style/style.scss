@@ -3,8 +3,7 @@
 * {
     font-family: $font;
     padding: 0;
-    margin: 0;
-    
+    margin: 0; 
 }
 
 html {
@@ -27,6 +26,10 @@ html {
         font: 700 2.4rem / 100% $font;
         color: #1C2A39;
     }
+}
+
+.header__mobil-menu {
+    display: none;
 }
 
 .menu {
@@ -100,13 +103,32 @@ html {
 }
 
 .banner__prome-one {
+    width: 14.9rem;
+    height: 20.4rem;
     top: 8.2rem;
     left: 105.7rem;
+    box-shadow: 0px 24px 36px 0px #35315447;
+    background-color: #9E98DC;
 }
-
+.banner__prome-one-link {
+    display: block;
+    color: #1C2A39;
+    text-decoration: none;
+    text-transform: uppercase;
+    font: 700 1.8rem / 100% $font;
+    padding: 10.2rem 2rem 2rem 2rem;
+}
 .banner__prome-two {
+    width: 13.7rem;
+    height: 27.3rem;
     top: 36.2rem;
     left: 114.3rem;
+    box-shadow: 0px 24px 36px 0px #35315447;
+    background-color: #FF8FE6;
+}
+.banner__prome-two-link {
+    @extend .banner__prome-one-link;
+    padding: 14.9rem 4.7rem 2rem 2.1rem;
 }
 
 .container {
@@ -187,7 +209,8 @@ html {
                     font: 700 1.6rem / 100% $font;
                     color: $colorTitleBook;
                     padding-top: 0.4rem;
-                    display: -webkit-box;  
+                    display: -webkit-box;
+                    line-clamp: -webkit-line;  
                     -webkit-box-orient: vertical;  
                     -webkit-line-clamp: 1; /* Ограничить 3 строками */  
                     overflow: hidden;  
@@ -208,7 +231,8 @@ html {
                     width: 17.6rem;
                     font: 1rem / 100% $fontDescriptions;
                     color: $colorTextDescriptions;
-                    display: -webkit-box;  
+                    display: -webkit-box;
+                    line-clamp: -webkit-line;    
                     -webkit-box-orient: vertical;  
                     -webkit-line-clamp: 3; /* Ограничить 3 строками */  
                     overflow: hidden;  
@@ -264,6 +288,7 @@ html {
     }
 }
 
+@import "styleMobil";
 
 
 
