@@ -265,8 +265,12 @@ html {
     margin: 9.6rem 52.3rem 7.4rem 74.1rem;
 }
 .container__btn:hover {
-    @extend .btn-hover;
-    display: block;
+    border: 0.1rem solid #EEEDF5;
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    font: 700 0.8rem / 100% $font;
+    cursor: pointer;
+    color: #5C6A79;
     margin: 9.6rem 52.3rem 7.4rem 74.1rem;
 }
 
