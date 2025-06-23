@@ -11,7 +11,6 @@ export default function dataBook(): void {
     const btnBuy = document.querySelectorAll(".container__books-block-info-btn");
     let numberOfBoks = 0;
     btnBuy.forEach((bay, index, array) => {
-        localStorage.clear()
         bay.addEventListener("click", () => {
             const boock = bay.closest(`#book-${index}`);
             if (boock == null) return;

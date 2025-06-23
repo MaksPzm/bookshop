@@ -1,6 +1,5 @@
 import Sliders from "./slider";
 import dataBook from "./dataBook";
-import cart from "./addedToCart";
 import mobilActiveMenu from "./mobil";
 function menuActive(): void {
     const menuLink: any = Array.from(document.querySelectorAll(".menu__list-item-link"));
@@ -161,5 +160,5 @@ const loadMore = () => {
 loadMore()
 
 
-cart()
+
 mobilActiveMenu()
