@@ -99,23 +99,29 @@ function displayResult(data: any) {
         let averageRating: string = resultAPI[i].volumeInfo.averageRating ? resultAPI[i].volumeInfo.averageRating : "";
         let ratingsCount: string = resultAPI[i].volumeInfo.ratingsCount ? resultAPI[i].volumeInfo.ratingsCount + "M" + " review" : "";
         let description: string = resultAPI[i].volumeInfo.description ? resultAPI[i].volumeInfo.description : "There is no description";
+        const repetingIndex = document.querySelectorAll(".container__books-block");
+        let index = i;
+        if (repetingIndex.length >= resultAPI.length) {
+            index = repetingIndex.length + 1; 
+        }
         const showBook = `
-            <div class="container__books-block" index=${i} id="book-${i}">
-                <img class="container__books-block-img" src="${img}">
-                <div class="container__books-block-info">
-                    <span class="container__books-block-info-autor">${authors}</span>
-                    <h2 class="container__books-block-info-title">${title}</h2>
-                    <div class="container__books-block-info-rating">
-                        <div class="container__books-block-info-rating-averageRating"><span class="container__books-block-info-rating-averageRating-textSp">${averageRating}</span></div>
-                        <span class="container__books-block-info-rating-ratingsCount">${ratingsCount}</span>
+                <div class="container__books-block" index=${index} id="book-${index}">
+                    <img class="container__books-block-img" src="${img}">
+                    <div class="container__books-block-info">
+                        <span class="container__books-block-info-autor">${authors}</span>
+                        <h2 class="container__books-block-info-title">${title}</h2>
+                        <div class="container__books-block-info-rating">
+                            <div class="container__books-block-info-rating-averageRating"><span class="container__books-block-info-rating-averageRating-textSp">${averageRating}</span></div>
+                            <span class="container__books-block-info-rating-ratingsCount">${ratingsCount}</span>
+                        </div>
+                        <p class="container__books-block-info-description">${description}</p>
+                        <span class="container__books-block-info-price">${price}</span>
+                        <button type="button" class="container__books-block-info-btn">buy now</button>
                     </div>
-                    <p class="container__books-block-info-description">${description}</p>
-                    <span class="container__books-block-info-price">${price}</span>
-                    <button type="button" class="container__books-block-info-btn">buy now</button>
                 </div>
-            </div>
-        `
-        containerBooks?.insertAdjacentHTML("beforeend", showBook);
+            `;   
+        containerBooks?.insertAdjacentHTML("beforeend", showBook);     
+        
     }
     averageRating()
 }
@@ -158,7 +164,4 @@ const loadMore = () => {
     })
 }
 loadMore()
-
-
-
 mobilActiveMenu()

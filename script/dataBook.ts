@@ -8,11 +8,13 @@ export default function dataBook(): void {
     } else {
         boocksDataLocal = [ ];
     }
-    const btnBuy = document.querySelectorAll(".container__books-block-info-btn");
+    let btnBuy = document.querySelectorAll(".container__books-block-info-btn");
+    
     let numberOfBoks = 0;
     btnBuy.forEach((bay, index, array) => {
         bay.addEventListener("click", () => {
-            const boock = bay.closest(`#book-${index}`);
+            const boock = bay.closest(`[index]`);
+            console.log('boock: ', boock);
             if (boock == null) return;
             const indexBoock: string | null = boock.getAttribute("index")
             const imgBock: HTMLImageElement | null = boock?.querySelector(".container__books-block-img") ? boock.querySelector(".container__books-block-img") : null;
