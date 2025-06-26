@@ -16,7 +16,7 @@ menuActive()
 
 function slider(): void {
     const dots = [...document.querySelectorAll(".banner__slider-dots-dot")];
-    const blockBanner: HTMLDivElement = <HTMLDivElement>document.querySelector(".baner__img");
+    const blockBanner: HTMLDivElement = <HTMLDivElement>document.querySelector(".banner__img");
     const img = ["images/png/banner1.png", "images/png/banner2.png", "images/png/banner3.png"];
     const newSlider = new Sliders(dots, blockBanner, img);
     newSlider.slider()
@@ -29,7 +29,7 @@ slider()
 
 const selectedCategory = (() => {
     const valueSelectedCategory: string[] = [ ];
-    const categories = document.querySelectorAll(".containner__categories-list-item");
+    const categories = document.querySelectorAll(".container__categories-list-item");
     categories.forEach((category) => {
         category.addEventListener('click', () => {
             const containerBooks = document.querySelectorAll(".container__books-block");
@@ -38,12 +38,12 @@ const selectedCategory = (() => {
                     books.remove()
                 })
             }
-            const categoriesInputActive = document.querySelector(".containner__categories-list-item-submit_active")
-            categories.forEach((value) => value.classList.remove("containner__categories-list-item_active"));
-            categoriesInputActive?.classList.remove("containner__categories-list-item-submit_active");
-            category.classList.add("containner__categories-list-item_active");
-            category.querySelector(".containner__categories-list-item-submit")?.classList.add("containner__categories-list-item-submit_active");
-            const valueCategory: null | HTMLInputElement = document.querySelector(".containner__categories-list-item-submit_active");
+            const categoriesInputActive = document.querySelector(".container__categories-list-item-submit_active")
+            categories.forEach((value) => value.classList.remove("container__categories-list-item_active"));
+            categoriesInputActive?.classList.remove("container__categories-list-item-submit_active");
+            category.classList.add("container__categories-list-item_active");
+            category.querySelector(".container__categories-list-item-submit")?.classList.add("container__categories-list-item-submit_active");
+            const valueCategory: null | HTMLInputElement = document.querySelector(".container__categories-list-item-submit_active");
             if (valueCategory !== null) {
                 valueSelectedCategory.pop();
                 valueSelectedCategory.unshift(valueCategory.value);
@@ -57,8 +57,8 @@ const selectedCategory = (() => {
 })()
 
 function saveCategoriesActive() {
-    const categories = document.querySelectorAll(".containner__categories-list-item");
-    const activeCat = document.querySelector(".containner__categories-list-item_active")?.getAttribute("index");
+    const categories = document.querySelectorAll(".container__categories-list-item");
+    const activeCat = document.querySelector(".container__categories-list-item_active")?.getAttribute("index");
     if (activeCat !== null) {
        localStorage.setItem("indexActive", JSON.stringify(activeCat))  
     }   
@@ -68,13 +68,13 @@ loadCategoriesActive()
 
 function loadCategoriesActive() {
     let localIndexActive: number = localStorage.getItem("indexActive") ? parseInt(JSON.parse(<string>localStorage.getItem("indexActive"))) : +0;
-    const categories = document.querySelectorAll(".containner__categories-list-item");
-    const categoriesInput = document.querySelectorAll(".containner__categories-list-item-submit");
-    categories.forEach(category => category.classList.remove("containner__categories-list-item_active"));
-    categoriesInput.forEach(categoryInput => categoryInput.classList.remove("containner__categories-list-item-submit_active"));
+    const categories = document.querySelectorAll(".container__categories-list-item");
+    const categoriesInput = document.querySelectorAll(".container__categories-list-item-submit");
+    categories.forEach(category => category.classList.remove("container__categories-list-item_active"));
+    categoriesInput.forEach(categoryInput => categoryInput.classList.remove("container__categories-list-item-submit_active"));
     if (localIndexActive === null) return;
-    categories[localIndexActive].classList.add("containner__categories-list-item_active");
-    categoriesInput[localIndexActive].classList.add("containner__categories-list-item-submit_active");
+    categories[localIndexActive].classList.add("container__categories-list-item_active");
+    categoriesInput[localIndexActive].classList.add("container__categories-list-item-submit_active");
 }
 
 function API(startIndex = 0, maxResults = 6) {
@@ -83,7 +83,9 @@ function API(startIndex = 0, maxResults = 6) {
         .then((response) => response.json())
         .then(displayResult)
         .then(dataBook)
-        .catch((err) => console.log("ERROR"))
+        .catch(err=> {
+            alert("An error occurred while loading books. Please try again.");
+        })
 }
 API()
 
@@ -108,7 +110,7 @@ function displayResult(data: any) {
                 <div class="container__books-block" index=${index} id="book-${index}">
                     <img class="container__books-block-img" src="${img}">
                     <div class="container__books-block-info">
-                        <span class="container__books-block-info-autor">${authors}</span>
+                        <span class="container__books-block-info-author">${authors}</span>
                         <h2 class="container__books-block-info-title">${title}</h2>
                         <div class="container__books-block-info-rating">
                             <div class="container__books-block-info-rating-averageRating"><span class="container__books-block-info-rating-averageRating-textSp">${averageRating}</span></div>

@@ -1,12 +1,22 @@
 
 export default function dataBook(): void {
-    let boocksData: any = [ ];
-    let boocksDataLocal: any;
+    type infoBock = {
+                indexBoock: string | null,
+                srcImgBock: string,
+                authorBock: string,
+                titleBock: string,
+                averageRatingBock: string | null,
+                ratingCountBock: string | null,
+                descriptionBock: string | null,
+                priceBock: string | null,
+            };
+    let booksData: Array<infoBock> = [ ];
+    let booksDataLocal: Array<infoBock>;
     if (localStorage.getItem("publishedBooks") !== null) {
         let parse = localStorage.getItem("publishedBooks")
-        boocksDataLocal = JSON.parse(<string>parse);
+        booksDataLocal = JSON.parse(<string>parse);
     } else {
-        boocksDataLocal = [ ];
+        booksDataLocal = [ ];
     }
     let btnBuy = document.querySelectorAll(".container__books-block-info-btn");
     
@@ -14,47 +24,44 @@ export default function dataBook(): void {
     btnBuy.forEach((bay, index, array) => {
         bay.addEventListener("click", () => {
             const boock = bay.closest(`[index]`);
-            console.log('boock: ', boock);
             if (boock == null) return;
             const indexBoock: string | null = boock.getAttribute("index")
             const imgBock: HTMLImageElement | null = boock?.querySelector(".container__books-block-img") ? boock.querySelector(".container__books-block-img") : null;
             let srcImgBock: string = ""
             if (imgBock !== null) srcImgBock = imgBock.src;
-            const autorBock: string = <string>boock?.querySelector(".container__books-block-info-autor")?.textContent;
+            const authorBock: string = <string>boock?.querySelector(".container__books-block-info-author")?.textContent;
             const titleBock: string = <string>boock.querySelector(".container__books-block-info-title")?.textContent;
             const averageRatingBock: string | null = boock.querySelector(".container__books-block-info-rating-averageRating") ? <string>boock.querySelector(".container__books-block-info-rating-averageRating")?.textContent : null;
             const ratingCountBock: string | null = boock.querySelector(".container__books-block-info-rating-ratingsCount") ? <string>boock.querySelector(".container__books-block-info-rating-ratingsCount")?.textContent : null;
             const descriptionBock: string | null = boock.querySelector(".container__books-block-info-description") ? <string>boock.querySelector(".container__books-block-info-description")?.textContent : null;
             const priceBock: string | null = boock.querySelector(".container__books-block-info-price") ? <string>boock.querySelector(".container__books-block-info-price")?.textContent : null;
-            type infoBock = {
-                indexBoock: string | null,
-                srcImgBock: string,
-                autorBock: string,
-                titleBock: string,
-                averageRatingBock: string | null,
-                ratingCountBock: string | null,
-                descriptionBock: string | null,
-                priceBock: string | null,
-            };
             let infoBock: infoBock = {
                 indexBoock: indexBoock,
                 srcImgBock: srcImgBock,
-                autorBock: autorBock,
+                authorBock: authorBock,
                 titleBock: titleBock,
                 averageRatingBock: averageRatingBock,
                 ratingCountBock: ratingCountBock,
                 descriptionBock: descriptionBock,
                 priceBock: priceBock
-            }
+            };
             
             if (bay.classList.contains("container__books-block-info-btn_active")) {
                 bay.classList.remove("container__books-block-info-btn_active");
                 bay.classList.add("container__books-block-info-btn")
                 numberOfBoks = numberOfBoks - 1;
                 bay.innerHTML = "buy now";
-                boocksData.pop(infoBock);
-                boocksDataLocal.pop(infoBock);
-                localStorage.setItem("publishedBooks", JSON.stringify(boocksDataLocal));
+                booksData.forEach((value, index) => {
+                    if (booksData[index].indexBoock == indexBoock) {
+                        booksData.splice(index, 1);
+                    }
+                })
+                booksDataLocal.forEach((value, index) => {
+                    if (booksDataLocal[index].indexBoock == indexBoock) {
+                        booksDataLocal.splice(index, 1);
+                    }
+                })
+                localStorage.setItem("publishedBooks", JSON.stringify(booksDataLocal));
                 
                 removeToBook(numberOfBoks);
             } else {
@@ -62,9 +69,9 @@ export default function dataBook(): void {
                 bay.classList.remove("container__books-block-info-btn")
                 bay.innerHTML = "in the cart";
                 numberOfBoks = numberOfBoks + 1;
-                boocksData.push(infoBock);
-                boocksDataLocal.push(infoBock);
-                localStorage.setItem("publishedBooks", JSON.stringify(boocksDataLocal));
+                booksData.push(infoBock);
+                booksDataLocal.push(infoBock);
+                localStorage.setItem("publishedBooks", JSON.stringify(booksDataLocal));
                 addToBook(numberOfBoks);
             }
         })
